@@ -11,11 +11,13 @@ class AnimaisController extends Controller
     }
 
     public function cadastrar() {
-        return view('Animais cadastrar');
+        return view('animais.cadastrar');
     }
 
-    public function gravar() {
-        return view('Animai cadastrar');
+    public function gravar(Request $form) {
+        // dd($form);
+        echo $form->nome;
     }
+
 }
 
