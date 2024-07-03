@@ -9,7 +9,12 @@
 
     <p><em>{{ $animal['nome'] }}</em></p>
 
-    <form action="apagar.blade.php">
+    <form action="{{ route('animais.apagar', $animal['id']) }}" method="post">
+        @method('delete')
+        @csrf
         
+        <input type="submit" value="Pode apagar sem medo" style="background:red; color:white;">
     </form>
+
+    <a href="{{ route('animais') }}">Cancelar</a>
 @endsection

@@ -31,12 +31,20 @@ class AnimaisController extends Controller
         return redirect()->route('animais');
     }
 
+    // mostra na tela a confirmacao
     public function apagar(Animal $animal){
         // dd($animal);
         return view('animais.apagar', [
             'animal' => $animal,
         ]);
     }
+
+    // efetivamente deleta no banco
+    public function deletar(Animal $animal){
+        $animal->delete();
+        return redirect()->route('animais');
+    }
+
 
     public function editar(Animal $animal) {
         return view('animais/editar', ['animal' => $animal]);
@@ -50,6 +58,6 @@ class AnimaisController extends Controller
 
         $animal->fill($dados);
         $animal->save();
-        return redirect()->route('animal');
+        return redirect()->route('animais');
     }
 }
