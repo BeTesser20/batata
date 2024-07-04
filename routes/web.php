@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\AnimaisController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('inicial');
+})->name('index');
 
 Route::get('/hello', function () {
     return view('hello');
@@ -29,3 +30,7 @@ Route::delete('animais/apagar/{animal}', [AnimaisController::class, 'deletar']);
 Route::get('/animais/editar/{animal}', [AnimaisController::class, 'editar'])->name('animais.editar');
 
 Route::put('/animais/editar/{animal}', [AnimaisController::class, 'editarGravar']);
+
+
+Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios');
+// quando acassar a rota via get animais ele vai pegar a funcao  controller e executar o index
