@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animal;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
@@ -27,6 +27,7 @@ class UsuariosController extends Controller
             'email' => 'required|min:3',
             'username' => 'required|min:3',
             'password' => 'required|min:3',
+            'admin' => 'boolean'
         ]);
         Usuario::create($dados);
         // echo 'Tudo certo!';
@@ -35,7 +36,7 @@ class UsuariosController extends Controller
 
     // mostra na tela a confirmacao
     public function apagar(Usuario $usuario){
-        // dd($animal);
+        // dd($usuario);
         return view('usuario.apagar', [
             'usuario' => $usuario,
         ]);
@@ -55,11 +56,13 @@ class UsuariosController extends Controller
     public function editarGravar(Request $form, Usuario $usuario) {
         $dados = $form->validate([
         'nome' => 'required|max:255',
-        'idade' => 'required'
+        'email' => 'required|max:255',
+        'username' => 'required|max:255',
+        'password' => 'required|max:255'
         ]);
 
-        $animal->fill($dados);
-        $animal->save();
-        return redirect()->route('animais');
+        $usuario->fill($dados);
+        $usuario->save();
+        return redirect()->route('usuarios');
     }
 }
