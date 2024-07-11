@@ -13,19 +13,19 @@
 
     <table border="10">
         <tr>
+            <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Username</th>
-            <th>Password</th>
             <th>Admin</th>
         </tr>
 
         @foreach($usuarios as $usuario)
             <tr>
+                <td>{{ $usuario['id'] }}</td>
                 <td>{{ $usuario['nome'] }}</td>
                 <td>{{ $usuario['email'] }}</td>
                 <td>{{ $usuario['username'] }}</td>
-                <td>{{ $usuario['password'] }}</td>
                 <td>@if($usuario['admin'] == 0) não @else sim @endif</td>
                 <td><a href="{{ route('usuarios.editar', $usuario['id']) }}">Editar</a></td>
                 <td><a href="{{ route('usuarios.apagar', $usuario['id']) }}">Apagar</a></td>

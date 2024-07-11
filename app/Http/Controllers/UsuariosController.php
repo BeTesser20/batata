@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsuariosController extends Controller
 {
     public function index() {
-        $dados = Usuario::all();
+        $dados = Usuario::orderBy('nome', 'asc')->get();
         // dd($dados);
         return view('usuarios.index', [
             'usuarios' => $dados,
@@ -24,11 +26,14 @@ class UsuariosController extends Controller
         // echo $form->nome;
         $dados = $form->validate([
             'nome' => 'required|min:3',
-            'email' => 'required|min:3',
+            'email' => 'email|required|unique:usuarios',
             'username' => 'required|min:3',
             'password' => 'required|min:3',
             'admin' => 'boolean'
         ]);
+
+        $dados['password'] = Hash::make($dados['password']);
+
         Usuario::create($dados);
         // echo 'Tudo certo!';
         return redirect()->route('usuarios');
@@ -58,11 +63,24 @@ class UsuariosController extends Controller
         'nome' => 'required|max:255',
         'email' => 'required|max:255',
         'username' => 'required|max:255',
-        'password' => 'required|max:255'
+        'password' => 'required|max:255',
+        'admin' => 'boolean'
         ]);
 
         $usuario->fill($dados);
         $usuario->save();
         return redirect()->route('usuarios');
+    }
+
+    public function login(request $form) {
+        if($form->isMethod('POST')){
+            dd($form);
+        }
+
+        return view('usuarios.login');
+    }
+
+    public function logout() {
+
     }
 }
