@@ -43,7 +43,7 @@ class UsuariosController extends Controller
     // mostra na tela a confirmacao
     public function apagar(Usuario $usuario){
         // dd($usuario);
-        return view('usuario.apagar', [
+        return view('usuarios.apagar', [
             'usuario' => $usuario,
         ]);
     }
@@ -85,7 +85,7 @@ class UsuariosController extends Controller
 
             // tenta fazer o login
             if(Auth::attempt($credenciais)){
-                return redirect()->route('index');
+                return redirect()->intended(route('index'));
             } else {
                 return redirect()->route('login')->with('erro', 'Usuário ou senha inválidos');
             }
