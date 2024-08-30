@@ -6,30 +6,38 @@
 
 @section('conteudo')
     <p>
-        <a href="{{ route('usuarios.cadastrar') }}">Cadastrar usuário</a>
+        <a href="{{ route('usuarios.cadastrar') }}" class="px-4 py-2 text-white font-light tracking-wider bg-blue-800 rounded"><i class="fas fa-plus mr-3"></i>Cadastrar usuário</a>
     </p>
 
     <p>Veja nossa lista de usuários</p>
 
-    <table border="10">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Admin</th>
-        </tr>
+    <div class="bg-white overflow-auto">
+        <table class="min-w-3/4 bg-white">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">ID</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Nome</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Username</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Admin</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Editar</th>
+                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Apagar</th>
+                </tr>
+            </thead>
 
-        @foreach($usuarios as $usuario)
-            <tr>
-                <td>{{ $usuario['id'] }}</td>
-                <td>{{ $usuario['nome'] }}</td>
-                <td>{{ $usuario['email'] }}</td>
-                <td>{{ $usuario['username'] }}</td>
-                <td>@if($usuario['admin'] == 0) não @else sim @endif</td>
-                <td><a href="{{ route('usuarios.editar', $usuario['id']) }}">Editar</a></td>
-                <td><a href="{{ route('usuarios.apagar', $usuario['id']) }}">Apagar</a></td>
-            </tr>
-        @endforeach
-    </table>
+            @foreach($usuarios as $usuario)
+                <tbody class="text-gray-700">
+                    <tr @if ($loop->even) class="bg-gray-200" @endif>
+                        <td class="w-1/3 text-left py-3 px-4">{{ $usuario['id'] }}</td>
+                        <td class="w-1/3 text-left py-3 px-4">{{ $usuario['nome'] }}</td>
+                        <td class="w-1/3 text-left py-3 px-4">{{ $usuario['email'] }}</td>
+                        <td class="w-1/3 text-left py-3 px-4">{{ $usuario['username'] }}</td>
+                        <td class="w-1/3 text-left py-3 px-4">@if($usuario['admin'] == 0) não @else sim @endif</td>
+                        <td class="w-1/3 text-left py-3 px-4"><a href="{{ route('usuarios.editar', $usuario['id']) }}">Editar</a></td>
+                        <td class="w-1/3 text-left py-3 px-4"><a href="{{ route('usuarios.apagar', $usuario['id']) }}">Apagar</a></td>
+                    </tr>
+                </tbody>
+            @endforeach
+        </table>
+    </div>
 @endsection
