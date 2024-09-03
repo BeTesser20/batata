@@ -33,8 +33,8 @@
                         <td class="w-1/3 text-left py-3 px-4">{{ $usuario['email'] }}</td>
                         <td class="w-1/3 text-left py-3 px-4">{{ $usuario['username'] }}</td>
                         <td class="w-1/3 text-left py-3 px-4">@if($usuario['admin'] == 0) não @else sim @endif</td>
-                        <td class="w-1/3 text-left py-3 px-4"><a href="{{ route('usuarios.editar', $usuario['id']) }}">Editar</a></td>
-                        <td class="w-1/3 text-left py-3 px-4"><a href="{{ route('usuarios.apagar', $usuario['id']) }}">Apagar</a></td>
+                        <td class="w-1/3 text-left py-3 px-4"><a class="px-3 py-1 font-bold text-green-900 bg-green-200 rounded-full" href="{{ route('usuarios.editar', $usuario['id']) }}"><i class="fas fa-edit">Editar</a></td>
+                        <td class="w-1/3 text-left py-3 px-4"><a class="px-3 py-1 font-bold text-red-900 bg-red-200 rounded-full" href="{{ route('usuarios.apagar', $usuario['id']) }}"><i class="fas fa-trash-alt">Apagar</a></td>
                     </tr>
                 </tbody>
             @endforeach
