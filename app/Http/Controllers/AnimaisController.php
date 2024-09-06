@@ -22,11 +22,16 @@ class AnimaisController extends Controller
     public function gravar(Request $form) {
         // // dd($form);
         // echo $form->nome;
-        dd($form);
+        $img = $form->file('imagem')->store('animais', 'imagens');
+        
+        // dd($form);
         $dados = $form->validate([
             'nome' => 'required|min:3',
-            'idade' => 'required|integer',
+            'idade' => 'required|integer'
         ]);
+
+        $dados['imagem'] = $img;
+
         Animal::create($dados);
         // echo 'Tudo certo!';
         return redirect()->route('animais');
