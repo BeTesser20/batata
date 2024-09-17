@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AnimalCadastrado;
 use App\Models\Animal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AnimaisController extends Controller
 {
     public function index() {
-        $dados = Animal::all();
+        $dados = Animal::get();
+        // withTrashed - com apagados
+        // onlyTrashed - apenas apagados
+        // somente get() - acesso normal aos não apagados
+
         // dd($dados);
         return view('animais.index', [
             'animais' => $dados,
@@ -32,9 +38,12 @@ class AnimaisController extends Controller
 
         $dados['imagem'] = $img;
 
-        Animal::create($dados);
-        // echo 'Tudo certo!';
-        return redirect()->route('animais');
+        // Animal::create($dados);
+
+        Mail::to('alguem@batata.com')->send(new AnimalCadastrado);
+        return;
+
+        // return redirect()->route('animais');
     }
 
     // mostra na tela a confirmacao
